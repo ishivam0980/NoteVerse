@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# NoteVerse
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A full-stack note-taking web application built with React and Node.js. Create, edit, delete, and manage your personal notes with secure user authentication.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- **🔐 User Authentication** - Secure signup/login with JWT tokens
+- **📝 Personal Notes** - Create, edit, delete, and organize your notes
+- **🔒 Security** - Password hashing with bcrypt, protected routes
+- **📱 Responsive Design** - Works seamlessly on desktop and mobile
+- **⚡ Real-time Updates** - Changes reflect immediately without page refresh
+- **🎨 Modern UI** - Clean interface built with Bootstrap
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Frontend:** React 18, React Router, Context API, Bootstrap, Axios
+**Backend:** Node.js, Express.js, MongoDB, Mongoose, JWT, Bcrypt
+**Database:** MongoDB with Mongoose ODM
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Quick Start
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js (v14 or higher)
+- MongoDB running locally on default port (27017)
+- Git
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/ishivam0980/NoteVerse.git
+cd NoteVerse
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Setup Backend
 
-### `npm run eject`
+```bash
+cd backend
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+3. Environment Configuration
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Create a `.env` file in the `backend` directory:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```env
+JWT_SECRET=your-super-secret-jwt-key
+MONGO_URI=mongodb://localhost:27017/noteVerse
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+**Note:** If no `.env` file is provided, the app will use default values, but it's recommended to set your own JWT secret for security.
 
-## Learn More
+4. Setup Frontend
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```bash
+# Go back to root directory
+cd ..
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+5. Start the Application
 
-### Code Splitting
+```bash
+# Terminal 1: Start Backend
+cd backend
+node index.js
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+# Terminal 2: Start Frontend
+npm start
+```
 
-### Analyzing the Bundle Size
+6. Access the Application
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- Frontend: [http://localhost:3000](http://localhost:3000)
+- Backend API: [http://localhost:5000](http://localhost:5000)
 
-### Making a Progressive Web App
+## API Endpoints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+| Method | Endpoint                      | Auth Required | Description                       |
+| ------ | ----------------------------- | ------------- | --------------------------------- |
+| POST   | `/api/auth/register`        | ❌            | User registration with validation |
+| POST   | `/api/auth/login`           | ❌            | User login with credentials       |
+| GET    | `/api/auth/user`            | ✅            | Get authenticated user profile    |
+| GET    | `/api/notes/fetchallnotes`  | ✅            | Get all notes for logged-in user  |
+| POST   | `/api/notes/addnote`        | ✅            | Create new note                   |
+| PUT    | `/api/notes/updatenote/:id` | ✅            | Update existing note              |
+| DELETE | `/api/notes/deletenote/:id` | ✅            | Delete note                       |
 
-### Advanced Configuration
+**Note:** Protected endpoints require `Authorization: Bearer <token>` header
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Project Structure
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+```
+noteverse/
+├── src/                    # React frontend
+│   ├── components/         # React components
+│   ├── context/           # State management
+│   └── styles/            # CSS files
+├── backend/               # Node.js backend
+│   ├── routes/            # API routes
+│   ├── models/            # Database models
+│   └── middleware/        # Auth middleware
+└── public/                # Static files
+```

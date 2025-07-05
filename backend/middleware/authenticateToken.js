@@ -2,7 +2,7 @@
 import jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
 dotenv.config();
-const JWT_SECRET = process.env.JWT_SECRET;
+const JWT_SECRET = process.env.JWT_SECRET || 'noteverse-super-secret-key-2025';
 
 const authenticateToken = (req, res, next) => {
     const authHeader = req.headers['authorization'];
@@ -13,7 +13,7 @@ const authenticateToken = (req, res, next) => {
     }
     
     try {
-        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, JWT_SECRET); // Use the same secret with fallback
         req.user = decoded; // Attach user info to request object
         next(); // Proceed to the next middleware or route handler
     } catch (error) {

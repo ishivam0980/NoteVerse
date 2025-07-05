@@ -6,7 +6,7 @@ import Note from '../models/Note.js';
 
 //ROUTE 1 : Get all notes for a user using GET /api/notes/fetchallnotes. Login required
 router.get('/fetchallnotes', authenticateToken, async (req, res) => {
-    try {   
+    try {
         const notes = await Note.find({ user: req.user.userId }); // Fetch notes for the authenticated user
         res.status(200).json({ message: 'Notes fetched successfully', notes });
     }
@@ -18,22 +18,23 @@ router.get('/fetchallnotes', authenticateToken, async (req, res) => {
 
 
 //ROUTE 2 : Add a new note using POST /api/notes/addnote. Login required
-router.post('/addnote',authenticateToken,[
-  // Note title validation
-  body('title')
-  .isLength({ min: 2, max: 100 })
-  .withMessage('Title must be between 2 and 100 characters'),
+router.post('/addnote', authenticateToken, [
+    // Note title validation
+    body('title')
+        .isLength({ min: 2, max: 100 })
+        .withMessage('Title must be between 2 and 100 characters'),
 
     // Note description validation
-   body('description')
-  .isLength({ min: 5, max: 500 })
-  .withMessage('Description must be between 5 and 500 characters')
+    body('description')
+        .isLength({ min: 5})
+        .withMessage('Description must be between 5 and 500 characters')
 
-],async(req,res)=>{
-    try{
+], async (req, res) => {
+    try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            const errorMessages = errors.array().map(err => err.msg).join(', ');
+            return res.status(400).json({ message: errorMessages });
         }
         const { title, tag, description } = req.body;
         const note = new Note({
@@ -45,7 +46,7 @@ router.post('/addnote',authenticateToken,[
         const savedNote = await note.save();
         res.status(201).json({ message: 'Note added successfully', note: savedNote });
     }
-    catch(error){
+    catch (error) {
         console.error(error.message);
         res.status(500).json({ message: 'Internal server error', error: error.message });
     }
@@ -56,21 +57,22 @@ router.post('/addnote',authenticateToken,[
 router.put('/updatenote/:id', authenticateToken, [
     // Note title validation if provided
     body('title')
-    .optional() 
-    .isLength({ min: 2, max: 100 })
-    .withMessage('Title must be between 2 and 100 characters'),
+        .optional()
+        .isLength({ min: 2, max: 100 })
+        .withMessage('Title must be between 2 and 100 characters'),
 
     // Note description validation if provided
     body('description')
-    .optional()
-    .isLength({ min: 5, max: 500 })
-    .withMessage('Description must be between 5 and 500 characters')
+        .optional()
+        .isLength({ min: 5, max: 500 })
+        .withMessage('Description must be between 5 and 500 characters')
 
 ], async (req, res) => {
     try {
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
-            return res.status(400).json({ errors: errors.array() });
+            const errorMessages = errors.array().map(err => err.msg).join(', ');
+            return res.status(400).json({ message: errorMessages });
         }
 
         //Create a newnote object
@@ -93,7 +95,7 @@ router.put('/updatenote/:id', authenticateToken, [
         }
 
         // Update the note with new values
-        const updatedNote = await Note.findByIdAndUpdate(noteId, { $set: newNote }, { new: true });        
+        const updatedNote = await Note.findByIdAndUpdate(noteId, { $set: newNote }, { new: true });
         res.status(200).json({ message: 'Note updated successfully', note: updatedNote });
 
     } catch (error) {

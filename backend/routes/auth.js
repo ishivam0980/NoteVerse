@@ -21,10 +21,6 @@ router.post('/register', [
       if (/\d/.test(value)) {
         throw new Error('Name cannot contain numbers');
       }
-      // Custom rule: Must start with capital letter
-      if (!/^[A-Z]/.test(value)) {
-        throw new Error('Name must start with a capital letter');
-      }
       return true;
     })
     .trim(),
@@ -48,25 +44,25 @@ router.post('/register', [
     .isLength({ min: 8 })
     .withMessage('Password must be at least 8 characters')
     .custom((value) => {
-      // Must contain at least one underscore
-      if (!value.includes('_')) {
-        throw new Error('Password must contain at least one underscore (_)');
-      }
+      // // Must contain at least one underscore
+      // if (!value.includes('_')) {
+      //   throw new Error('Password must contain at least one underscore (_)');
+      // }
       
-      // Must contain at least one uppercase letter
-      if (!/[A-Z]/.test(value)) {
-        throw new Error('Password must contain at least one uppercase letter');
-      }
+      // // Must contain at least one uppercase letter
+      // if (!/[A-Z]/.test(value)) {
+      //   throw new Error('Password must contain at least one uppercase letter');
+      // }
       
-      // Must contain at least one lowercase letter
-      if (!/[a-z]/.test(value)) {
-        throw new Error('Password must contain at least one lowercase letter');
-      }
+      // // Must contain at least one lowercase letter
+      // if (!/[a-z]/.test(value)) {
+      //   throw new Error('Password must contain at least one lowercase letter');
+      // }
       
-      // Must contain at least one number
-      if (!/\d/.test(value)) {
-        throw new Error('Password must contain at least one number');
-      }
+      // // Must contain at least one number
+      // if (!/\d/.test(value)) {
+      //   throw new Error('Password must contain at least one number');
+      // }
       
       // Must contain at least one special character (!@#$%^&*_)
       if (!/[!@#$%^&*_]/.test(value)) {
