@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { createPortal } from 'react-dom';
 import NoteContext from '../context/notes/noteContext'
 
 export default function NoteItem(props) {
@@ -22,16 +23,26 @@ export default function NoteItem(props) {
     return text.substr(0, maxLength) + '...';
   };
 
+  const handleViewClick = () => {
+    if (isEditing) return; // Prevent opening modal when in edit mode
+    setShowViewModal(true);
+  };
+
+  const handleButtonClick = (e, action) => {
+    e.stopPropagation(); // Prevent card click event
+    action();
+  };
+
   const handleEditClick = () => {
     setIsEditing(true);
   };
 
-  const handleViewClick = () => {
-    setShowViewModal(true);
-  };
-
   const handleFullEditClick = () => {
     setShowEditModal(true);
+  };
+
+  const handleDelete = () => {
+    deleteNote(note._id);
   };
 
   const handleSave = () => {
@@ -72,7 +83,11 @@ export default function NoteItem(props) {
   return (
     <>
       <div className="col-lg-4 col-md-6 col-sm-12 mb-4">
-        <div className="card h-100" style={{ minHeight: '280px' }}>
+        <div 
+          className="card h-100" 
+          style={{ minHeight: '280px', cursor: isEditing ? 'default' : 'pointer' }} 
+          onClick={handleViewClick}
+        >
           <div className="card-body d-flex flex-column">
             {!isEditing ? (
               // View Mode
@@ -101,29 +116,22 @@ export default function NoteItem(props) {
                 <div className="mt-auto">
                   <div className="d-flex justify-content-center gap-3">
                     <button
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={handleViewClick}
-                      title="View full note"
-                    >
-                      <i className="fa-solid fa-eye"></i>
-                    </button>
-                    <button
                       className="btn btn-outline-warning btn-sm"
-                      onClick={handleEditClick}
+                      onClick={(e) => handleButtonClick(e, handleEditClick)}
                       title="Quick edit"
                     >
                       <i className="fa-solid fa-pen"></i>
                     </button>
                     <button
                       className="btn btn-outline-info btn-sm"
-                      onClick={handleFullEditClick}
+                      onClick={(e) => handleButtonClick(e, handleFullEditClick)}
                       title="Full edit"
                     >
                       <i className="fa-solid fa-edit"></i>
                     </button>
                     <button
                       className="btn btn-outline-danger btn-sm"
-                      onClick={() => { deleteNote(note._id) }}
+                      onClick={(e) => handleButtonClick(e, handleDelete)}
                       title="Delete note"
                     >
                       <i className="fa-solid fa-trash"></i>
@@ -185,9 +193,9 @@ export default function NoteItem(props) {
       </div>
 
       {/* View Modal */}
-      {showViewModal && (
-        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog modal-lg">
+      {showViewModal && createPortal(
+        <div className="modal fade show d-block" style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(15, 23, 42, 0.8)', backdropFilter: 'blur(8px)', zIndex: 1060 }}>
+          <div className="modal-dialog modal-lg" style={{ margin: '2rem auto', zIndex: 1061 }}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">{note.title}</h5>
@@ -223,13 +231,14 @@ export default function NoteItem(props) {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
 
       {/* Full Edit Modal */}
-      {showEditModal && (
-        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)' }}>
-          <div className="modal-dialog modal-lg">
+      {showEditModal && createPortal(
+        <div className="modal fade show d-block" style={{ backgroundColor: 'rgba(0,0,0,0.5)', zIndex: 1060 }}>
+          <div className="modal-dialog modal-lg" style={{ zIndex: 1061 }}>
             <div className="modal-content">
               <div className="modal-header">
                 <h5 className="modal-title">Edit Note</h5>
@@ -292,7 +301,8 @@ export default function NoteItem(props) {
               </div>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   )

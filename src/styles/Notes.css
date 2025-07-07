@@ -228,6 +228,159 @@
   box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3) !important;
 }
 
+/* Modal Styling */
+.modal {
+  z-index: 1070 !important;
+}
+
+.modal-dialog {
+  margin: 2rem auto !important;
+}
+
+.modal-content {
+  background: white !important;
+  border: none !important;
+  border-radius: 20px !important;
+  box-shadow: 0 20px 60px rgba(139, 61, 255, 0.3) !important;
+  overflow: hidden !important;
+  position: relative !important;
+  z-index: 1071 !important;
+}
+
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #8B3DFF, #00C4CC);
+  z-index: 1;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  border-bottom: 1px solid rgba(139, 61, 255, 0.1) !important;
+  padding: 1.5rem 2rem !important;
+  position: relative;
+  z-index: 2;
+}
+
+.modal-title {
+  color: #1f2937 !important;
+  font-weight: 700 !important;
+  font-size: 1.375rem !important;
+  margin: 0 !important;
+  background: linear-gradient(135deg, #8B3DFF, #00C4CC);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text;
+}
+
+.modal-body {
+  padding: 2rem !important;
+  color: #374151 !important;
+  line-height: 1.6 !important;
+  font-size: 1rem !important;
+}
+
+.modal-body .badge {
+  background: linear-gradient(135deg, #8B3DFF, #00C4CC) !important;
+  color: white !important;
+  font-weight: 500 !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 25px !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+}
+
+.modal-body .text-muted {
+  color: #6b7280 !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+}
+
+.modal-footer {
+  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%) !important;
+  border-top: 1px solid rgba(139, 61, 255, 0.1) !important;
+  padding: 1.5rem 2rem !important;
+  justify-content: center !important;
+}
+
+.modal-footer .btn-secondary {
+  background: linear-gradient(135deg, #8B3DFF, #00C4CC) !important;
+  border: none !important;
+  color: white !important;
+  font-weight: 600 !important;
+  padding: 0.75rem 2rem !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 15px rgba(139, 61, 255, 0.3) !important;
+}
+
+.modal-footer .btn-secondary:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 25px rgba(139, 61, 255, 0.4) !important;
+  background: linear-gradient(135deg, #7c3aed, #0891b2) !important;
+}
+
+.btn-close {
+  background: none !important;
+  border: none !important;
+  font-size: 1.5rem !important;
+  opacity: 0.6 !important;
+  transition: all 0.2s ease !important;
+  width: 32px !important;
+  height: 32px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 8px !important;
+}
+
+.btn-close:hover {
+  opacity: 1 !important;
+  background: rgba(139, 61, 255, 0.1) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Edit Modal Form Styling */
+.modal .form-control {
+  border: 2px solid #e5e7eb !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1rem !important;
+  font-size: 1rem !important;
+  transition: all 0.2s ease !important;
+  background: #f9fafb !important;
+}
+
+.modal .form-control:focus {
+  border-color: #8B3DFF !important;
+  box-shadow: 0 0 0 3px rgba(139, 61, 255, 0.1) !important;
+  background: white !important;
+}
+
+.modal .form-label {
+  font-weight: 600 !important;
+  color: #374151 !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 0.95rem !important;
+}
+
+/* Modal backdrop styling */
+.modal.show {
+  background: rgba(15, 23, 42, 0.7) !important;
+  backdrop-filter: blur(8px) !important;
+  z-index: 1069 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .notes-container {
@@ -244,6 +397,21 @@
   
   .alert-info {
     padding: 2rem 1.5rem;
+  }
+  
+  .modal-dialog {
+    margin: 1rem !important;
+    max-width: calc(100% - 2rem) !important;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: 1.25rem !important;
+  }
+  
+  .modal-title {
+    font-size: 1.25rem !important;
   }
 }
 
