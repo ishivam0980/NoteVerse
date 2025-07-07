@@ -1,13 +1,29 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import AuthContext from '../context/auth/authContext';
+import '../styles/Navbar.css';
 
 export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const authContext = useContext(AuthContext);
   const { isAuthenticated, user, logout } = authContext;
+
+  // Add scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      const navbar = document.querySelector('.navbar');
+      if (window.scrollY > 50) {
+        navbar?.classList.add('scrolled');
+      } else {
+        navbar?.classList.remove('scrolled');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleLogout = () => {
     logout();
@@ -16,7 +32,7 @@ export default function Navbar() {
 
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-dark">
         <div className="container-fluid">
           <Link className="navbar-brand" to="/home">NoteVerse</Link>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" 
@@ -38,19 +54,16 @@ export default function Navbar() {
             
             <div className="d-flex align-items-center">
               {isAuthenticated() ? (
-                // Show user info and logout when authenticated
+                // Show logout when authenticated
                 <>
-                  <span className="navbar-text me-3">
-                    Welcome, {user?.name}!
-                  </span>
-                  <button className="btn btn-outline-light" onClick={handleLogout}>
+                  <button className="btn btn-light" onClick={handleLogout}>
                     Logout
                   </button>
                 </>
               ) : (
                 // Show login/signup when not authenticated
                 <>
-                  <Link to="/login" className="btn btn-outline-light me-2">
+                  <Link to="/login" className="btn btn-light me-2">
                     Login
                   </Link>
                   <Link to="/signup" className="btn btn-light">

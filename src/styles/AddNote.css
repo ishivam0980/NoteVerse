@@ -1,0 +1,148 @@
+/* AddNote Component Styles */
+.add-note-section {
+  margin-bottom: 2rem;
+}
+
+.add-note-card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.add-note-header {
+  background: linear-gradient(135deg, #8B3DFF 0%, #00C4CC 100%);
+  color: white;
+  padding: 20px 24px;
+  border: none;
+}
+
+.add-note-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.add-note-body {
+  padding: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+  font-size: 0.875rem;
+  display: block;
+}
+
+.form-control {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.form-control:focus {
+  border-color: #8B3DFF;
+  box-shadow: 0 0 0 3px rgba(139, 61, 255, 0.1);
+  background: white;
+  outline: none;
+}
+
+.form-control::placeholder {
+  color: #9ca3af;
+}
+
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.add-note-btn {
+  background: #8B3DFF;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: white;
+  width: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(139, 61, 255, 0.2);
+}
+
+.add-note-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #8B3DFF 0%, #00C4CC 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: -1;
+}
+
+.add-note-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(139, 61, 255, 0.3);
+  background: #7c35e6;
+}
+
+.add-note-btn:hover::before {
+  opacity: 1;
+}
+
+.add-note-btn:active {
+  transform: translateY(0);
+}
+
+.add-note-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  background: #9ca3af;
+}
+
+.add-note-btn:disabled::before {
+  opacity: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .add-note-card {
+    margin: 0 16px;
+  }
+  
+  .add-note-header {
+    padding: 16px 20px;
+  }
+  
+  .add-note-title {
+    font-size: 1.125rem;
+  }
+  
+  .add-note-body {
+    padding: 20px;
+  }
+  
+  .form-control {
+    padding: 10px 14px;
+  }
+}

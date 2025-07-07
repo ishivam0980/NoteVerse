@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
+import '../styles/Login.css';
 
 export default function Login() {
   const authContext = useContext(AuthContext);
@@ -53,48 +54,50 @@ export default function Login() {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card shadow">
-            <div className="card-header bg-primary text-white">
-              <h3 className="mb-0">Login</h3>
+    <div className="login-container">
+      <div className="login-card">
+        <div className="login-header">
+          <h3>Welcome Back</h3>
+          <p className="login-subtitle">Sign in to your account</p>
+        </div>
+        
+        <div className="login-body">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <input 
+                type="email" 
+                className={`form-control ${errors.email ? 'is-invalid' : ''}`}
+                id="email" 
+                value={credentials.email}
+                onChange={onChange}
+                placeholder="Enter your email address" 
+              />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
             </div>
-            <div className="card-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input 
-                    type="email" 
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    id="email" 
-                    value={credentials.email}
-                    onChange={onChange}
-                    placeholder="Enter your email" 
-                  />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input 
-                    type="password" 
-                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                    id="password" 
-                    value={credentials.password}
-                    onChange={onChange}
-                    placeholder="Enter your password" 
-                  />
-                  {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-                </div>
-                <button type="submit" className="btn btn-primary w-100 mb-3">Login</button>
-              </form>
-              
-              <div className="text-center">
-                <p className="mb-0">Don't have an account? 
-                  <Link to="/signup" className="text-decoration-none"> Sign up here</Link>
-                </p>
-              </div>
+            
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input 
+                type="password" 
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                id="password" 
+                value={credentials.password}
+                onChange={onChange}
+                placeholder="Enter your password" 
+              />
+              {errors.password && <div className="invalid-feedback">{errors.password}</div>}
             </div>
+            
+            <button type="submit" className="login-btn" disabled={isLoggingIn}>
+              {isLoggingIn ? 'Signing In...' : 'Sign In'}
+            </button>
+          </form>
+          
+          <div className="login-footer">
+            <p>Don't have an account? 
+              <Link to="/signup"> Create one here</Link>
+            </p>
           </div>
         </div>
       </div>

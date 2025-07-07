@@ -1,1 +1,40 @@
 /* Main App Styles */
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+}
+
+/* Global container styles */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Page wrapper for consistent spacing */
+.page-wrapper {
+  padding: 2rem 0;
+  min-height: calc(100vh - 60px); /* Subtract navbar height */
+}
+
+/* Utility classes */
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1.5rem;
+}
+
+.p-4 {
+  padding: 1.5rem;
+}

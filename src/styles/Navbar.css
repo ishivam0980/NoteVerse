@@ -1,0 +1,255 @@
+/* Navbar Styles with Canva Theme */
+.navbar {
+  background: linear-gradient(135deg, #8B3DFF 0%, #00C4CC 100%) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 8px 0 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
+  z-index: 1050 !important;
+  box-shadow: 0 2px 10px rgba(139, 61, 255, 0.15);
+  transition: all 0.3s ease;
+  height: 60px;
+}
+
+.navbar-brand {
+  font-weight: 700 !important;
+  font-size: 1.375rem !important;
+  color: white !important;
+  text-decoration: none !important;
+  background: linear-gradient(45deg, #ffffff, #f0f9ff);
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text;
+  text-shadow: none !important;
+  transition: all 0.3s ease;
+}
+
+.navbar-brand:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+.navbar-toggler {
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  transition: all 0.2s ease;
+}
+
+.navbar-toggler:hover {
+  border-color: rgba(255, 255, 255, 0.6) !important;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25) !important;
+}
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='m4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-nav .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+  font-size: 1rem !important;
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  margin: 0 2px !important;
+  transition: all 0.2s ease !important;
+  position: relative;
+}
+
+.navbar-nav .nav-link:hover {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  transform: translateY(-1px);
+}
+
+.navbar-nav .nav-link.active {
+  color: white !important;
+  background: rgba(255, 255, 255, 0.25) !important;
+  font-weight: 600 !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+}
+
+.navbar-nav .nav-link.active::after {
+  display: none;
+}
+
+.navbar-text {
+  color: rgba(255, 255, 255, 0.9) !important;
+  font-weight: 500 !important;
+  font-size: 0.95rem !important;
+  margin: 0 !important;
+}
+
+/* Custom Button Styles */
+.btn-outline-light {
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  background: transparent !important;
+  padding: 4px 12px !important;
+  font-weight: 500 !important;
+  font-size: 0.9rem !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.btn-outline-light:hover {
+  color: #8B3DFF !important;
+  background: white !important;
+  border-color: white !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-light {
+  background: white !important;
+  color: #8B3DFF !important;
+  border: 2px solid white !important;
+  padding: 4px 12px !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  border-radius: 6px !important;
+  transition: all 0.2s ease !important;
+  text-decoration: none !important;
+}
+
+.btn-light:hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #00C4CC !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Container adjustments */
+.container-fluid {
+  padding: 0 20px !important;
+}
+
+/* Scrolled state for enhanced effect */
+.navbar.scrolled {
+  padding: 6px 0;
+  box-shadow: 0 4px 20px rgba(139, 61, 255, 0.25);
+}
+
+/* User welcome text styling */
+.navbar-text {
+  background: linear-gradient(45deg, #ffffff, #f0f9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Mobile optimizations */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background: rgba(139, 61, 255, 0.95);
+    backdrop-filter: blur(10px);
+    margin-top: 16px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar-nav {
+    margin-bottom: 16px !important;
+  }
+  
+  .navbar-nav .nav-link {
+    margin: 4px 0 !important;
+    text-align: center;
+  }
+  
+  .navbar-text {
+    text-align: center;
+    margin-bottom: 12px !important;
+    display: block;
+  }
+  
+  .d-flex {
+    flex-direction: column !important;
+    gap: 8px;
+  }
+  
+  .btn-outline-light,
+  .btn-light {
+    width: 100%;
+    margin: 0 !important;
+  }
+  
+  .container-fluid {
+    padding: 0 16px !important;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 575.98px) {
+  .navbar-brand {
+    font-size: 1.25rem !important;
+  }
+  
+  .container-fluid {
+    padding: 0 12px !important;
+  }
+}
+
+/* Animation for better UX */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.navbar {
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Focus states for accessibility */
+/* Remove focus outline when clicked with mouse */
+.navbar-nav .nav-link:focus:not(:focus-visible),
+.btn-outline-light:focus:not(:focus-visible),
+.btn-light:focus:not(:focus-visible) {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Show focus outline only for keyboard navigation */
+.navbar-nav .nav-link:focus-visible,
+.btn-outline-light:focus-visible,
+.btn-light:focus-visible {
+  outline: 2px solid rgba(255, 255, 255, 0.7) !important;
+  outline-offset: 2px !important;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Additional fallback for browsers that don't support :focus-visible */
+.navbar-nav .nav-link:focus,
+.btn-outline-light:focus,
+.btn-light:focus {
+  outline: none;
+}
+
+/* Remove any default browser focus styles */
+.navbar-nav .nav-link,
+.btn-outline-light,
+.btn-light {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling adjustment for fixed navbar */
+html {
+  scroll-padding-top: 70px;
+}

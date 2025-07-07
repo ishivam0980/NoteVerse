@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import AuthContext from '../context/auth/authContext';
+import '../styles/Signup.css';
 
 export default function Signup() {
   const authContext = useContext(AuthContext);
@@ -15,6 +16,19 @@ export default function Signup() {
   });
 
   const [errors, setErrors] = useState({});
+  const [isRegistering, setIsRegistering] = useState(false);
+
+  // Password strength calculation
+  const getPasswordStrength = (password) => {
+    if (password.length === 0) return 0;
+    if (password.length < 4) return 1;
+    if (password.length < 6) return 2;
+    if (password.length >= 6 && /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)/.test(password)) return 4;
+    if (password.length >= 6) return 3;
+    return 2;
+  };
+
+  const passwordStrength = getPasswordStrength(credentials.password);
 
   const validateForm = () => {
     const newErrors = {};
@@ -40,9 +54,12 @@ export default function Signup() {
       return;
     }
 
+    setIsRegistering(true);
     const result = await register(credentials.name, credentials.email, credentials.password);
     if (result.success) {
       navigate('/home');
+    } else {
+      setIsRegistering(false);
     }
   };
 
@@ -54,72 +71,87 @@ export default function Signup() {
   };
 
   return (
-    <div className="container mt-4">
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <div className="card shadow">
-            <div className="card-header bg-success text-white">
-              <h3 className="mb-0">Sign Up</h3>
+    <div className="signup-container">
+      <div className="signup-card">
+        <div className="signup-header">
+          <h3>Join NoteVerse</h3>
+          <p className="signup-subtitle">Create your account to get started</p>
+        </div>
+        
+        <div className="signup-body">
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">Full Name</label>
+              <input 
+                type="text" 
+                className={`form-control ${errors.name ? 'is-invalid' : credentials.name ? 'form-success' : ''}`}
+                id="name" 
+                value={credentials.name}
+                onChange={onChange}
+                placeholder="Enter your full name" 
+              />
+              {errors.name && <div className="invalid-feedback">{errors.name}</div>}
             </div>
-            <div className="card-body">
-              <form onSubmit={handleSubmit}>
-                <div className="mb-3">
-                  <label htmlFor="name" className="form-label">Name</label>
-                  <input 
-                    type="text" 
-                    className={`form-control ${errors.name ? 'is-invalid' : ''}`}
-                    id="name" 
-                    value={credentials.name}
-                    onChange={onChange}
-                    placeholder="Enter your name" 
-                  />
-                  {errors.name && <div className="invalid-feedback">{errors.name}</div>}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="email" className="form-label">Email address</label>
-                  <input 
-                    type="email" 
-                    className={`form-control ${errors.email ? 'is-invalid' : ''}`}
-                    id="email" 
-                    value={credentials.email}
-                    onChange={onChange}
-                    placeholder="Enter your email" 
-                  />
-                  {errors.email && <div className="invalid-feedback">{errors.email}</div>}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="password" className="form-label">Password</label>
-                  <input 
-                    type="password" 
-                    className={`form-control ${errors.password ? 'is-invalid' : ''}`}
-                    id="password" 
-                    value={credentials.password}
-                    onChange={onChange}
-                    placeholder="Choose a password" 
-                  />
-                  {errors.password && <div className="invalid-feedback">{errors.password}</div>}
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                  <input 
-                    type="password" 
-                    className={`form-control ${errors.confirmPassword ? 'is-invalid' : ''}`}
-                    id="confirmPassword" 
-                    value={credentials.confirmPassword}
-                    onChange={onChange}
-                    placeholder="Confirm your password" 
-                  />
-                  {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
-                </div>
-                <button type="submit" className="btn btn-success w-100 mb-3">Sign Up</button>
-              </form>
+            
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">Email Address</label>
+              <input 
+                type="email" 
+                className={`form-control ${errors.email ? 'is-invalid' : credentials.email ? 'form-success' : ''}`}
+                id="email" 
+                value={credentials.email}
+                onChange={onChange}
+                placeholder="Enter your email address" 
+              />
+              {errors.email && <div className="invalid-feedback">{errors.email}</div>}
+            </div>
+            
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">Password</label>
+              <input 
+                type="password" 
+                className={`form-control ${errors.password ? 'is-invalid' : ''}`}
+                id="password" 
+                value={credentials.password}
+                onChange={onChange}
+                placeholder="Choose a strong password" 
+              />
+              {errors.password && <div className="invalid-feedback">{errors.password}</div>}
               
-              <div className="text-center">
-                <p className="mb-0">Already have an account? 
-                  <Link to="/login" className="text-decoration-none"> Login here</Link>
-                </p>
-              </div>
+              {/* Password strength indicator */}
+              {credentials.password && (
+                <div className="password-strength">
+                  <div className={`strength-bar ${passwordStrength >= 1 ? 'weak' : ''}`}></div>
+                  <div className={`strength-bar ${passwordStrength >= 2 ? 'weak' : ''}`}></div>
+                  <div className={`strength-bar ${passwordStrength >= 3 ? 'medium' : ''}`}></div>
+                  <div className={`strength-bar ${passwordStrength >= 4 ? 'strong' : ''}`}></div>
+                </div>
+              )}
             </div>
+            
+            <div className="form-group">
+              <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
+              <input 
+                type="password" 
+                className={`form-control ${errors.confirmPassword ? 'is-invalid' : 
+                  credentials.confirmPassword && credentials.password === credentials.confirmPassword ? 'form-success' : ''}`}
+                id="confirmPassword" 
+                value={credentials.confirmPassword}
+                onChange={onChange}
+                placeholder="Confirm your password" 
+              />
+              {errors.confirmPassword && <div className="invalid-feedback">{errors.confirmPassword}</div>}
+            </div>
+            
+            <button type="submit" className="signup-btn" disabled={isRegistering}>
+              {isRegistering ? 'Creating Account...' : 'Create Account'}
+            </button>
+          </form>
+          
+          <div className="signup-footer">
+            <p>Already have an account? 
+              <Link to="/login"> Sign in here</Link>
+            </p>
           </div>
         </div>
       </div>

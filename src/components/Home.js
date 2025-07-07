@@ -1,11 +1,16 @@
 
 import React from 'react'
+import AddNote from './AddNote'
 import Notes from '../components/Notes'
+import '../styles/Home.css'
 
 export default function Home() {
   return (
-    <main className="container-fluid py-3">
-      <Notes />
-    </main>
+    <div className="main-container">
+      <div className="page-wrapper">
+        <AddNote />
+        <Notes />
+      </div>
+    </div>
   )
 }
