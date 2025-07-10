@@ -2,6 +2,20 @@
 
 A full-stack note-taking web application built with React and Node.js. Create, edit, delete, and manage your personal notes with secure user authentication.
 
+## Screenshots
+
+![Screenshot 1](public/assets/ss%20(1).png)
+
+![Screenshot 2](public/assets/ss%20(2).png)
+
+![Screenshot 3](public/assets/ss%20(3).png)
+
+![Screenshot 4](public/assets/ss%20(4).png)
+
+![Screenshot 5](public/assets/ss%20(5).png)
+
+![Screenshot 6](public/assets/ss%20(6).png)
+
 ## Features
 
 - **🔐 User Authentication** - Secure signup/login with JWT tokens
